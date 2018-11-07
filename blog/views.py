@@ -1,8 +1,27 @@
 from django.shortcuts import render,HttpResponse
 
 # Create your views here.
+from django.http import JsonResponse
 
 def login(request):
+
+    if request.method=='POST':
+        response = {"user":None,"msg":None}
+
+        user = request.POST.get('user')
+        pwd = request.POST.get('pwd')
+        valid_code = request.POST.get('valid_code')
+
+        # 校验验证码 验证码存在session里  而不是 global里因为 另一个用户访问的时候 就变了
+        valid_code_str = request.session.get('valid_code_str')
+        if valid_code.upper()==valid_code_str.upper():
+
+            pass
+        else:
+            response['msg']='valid code error'
+
+        return JsonResponse(response)
+
     return render(request,'login.html')
 
 # 返回图片验证码
@@ -48,7 +67,7 @@ def get_validCode_img(request):
     kumo_font = ImageFont.truetype("static/font/kumo.ttf",size=32)
 
     # 随机内容
-
+    valid_code_str = ''
     for i in range(5):
         random_num=chr(random.randint(0,9))
         random_low_alpha =  chr(random.randint(95, 122))
@@ -57,7 +76,7 @@ def get_validCode_img(request):
 
         # draw.text((0,5),'python',get_random_color(),font=kumo_font)
         draw.text((i*50,5),random_char,get_random_color(),font=kumo_font)
-
+        valid_code_str += random_char
     # 躁线
     # width=270
     # height=40
@@ -73,6 +92,15 @@ def get_validCode_img(request):
     #     x = random.randint(0, width)
     #     y = random.randint(0, height)
     #     draw.arc((x, y, x + 4, y + 4), 0, 90, fill=get_random_color())
+    print(valid_code_str) # 打印随机字符
+    request.session['valid_code_str'] = valid_code_str
+    '''
+    1。生成随机字符串 xxxx
+    2。设置个cookie {"sessionid":xxxx}
+    3。django-session里存储
+        session-key session-data
+        xxxx    {"valid_code_str":"12345"}
+    '''
 
     f = BytesIO()
     img.save(f, 'png')
