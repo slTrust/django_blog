@@ -58,6 +58,22 @@ def get_validCode_img(request):
         # draw.text((0,5),'python',get_random_color(),font=kumo_font)
         draw.text((i*50,5),random_char,get_random_color(),font=kumo_font)
 
+    # 躁线
+    # width=270
+    # height=40
+    # for i in range(10):
+    #     x1=random.randint(0,width)
+    #     x2=random.randint(0,width)
+    #     y1=random.randint(0,height)
+    #     y2=random.randint(0,height)
+    #     draw.line((x1,y1,x2,y2),fill=get_random_color())
+    #
+    # for i in range(100):
+    #     draw.point([random.randint(0, width), random.randint(0, height)], fill=get_random_color())
+    #     x = random.randint(0, width)
+    #     y = random.randint(0, height)
+    #     draw.arc((x, y, x + 4, y + 4), 0, 90, fill=get_random_color())
+
     f = BytesIO()
     img.save(f, 'png')
     data = f.getvalue()
