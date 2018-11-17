@@ -9,6 +9,7 @@
             margin-left: 20px;
         }
         #avatar{display: none;}
+        .error{color:red;}
     </style>
 </head>
 <body>
@@ -22,7 +23,7 @@
                 {% for field in form  %}
                      <div class="form-group">
                         <label for="{{ field.auto_id }}">{{ field.label }}</label>
-                        {{ field }}
+                        {{ field }} <span class="error pull-right"></span>
                     </div>
 
                 {% endfor %}
@@ -85,7 +86,15 @@
             processData:false,
             data:formdata,
             success:function(data){
-                console.log(data)
+                if(data.user){
+                    //注册成功
+                }else{
+                    console.log(data.msg)
+                    $.each(data.msg,function(field,error_list){
+                        console.log(field,error_list)
+                        $('#id_'+field).next().html(error_list[0])
+                    })
+                }
             }
         })
     })
