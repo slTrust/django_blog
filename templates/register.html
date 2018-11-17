@@ -89,10 +89,13 @@
                 if(data.user){
                     //注册成功
                 }else{
-                    console.log(data.msg)
+                    //清空错误信息
+                    $('span.error').html('')
+                    $('.form-group').removeClass('has-error');
                     $.each(data.msg,function(field,error_list){
                         console.log(field,error_list)
                         $('#id_'+field).next().html(error_list[0])
+                        $('#id_'+field).parent().addClass('has-error');
                     })
                 }
             }
