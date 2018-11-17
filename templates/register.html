@@ -94,6 +94,12 @@
                     $('.form-group').removeClass('has-error');
                     $.each(data.msg,function(field,error_list){
                         console.log(field,error_list)
+                        if(field=='__all__'){
+                            //全局错误信息
+                            $('#id_re_pwd').next().html(error_list[0])
+                            $('#id_re_pwd').parent().addClass('has-error');
+                        }
+
                         $('#id_'+field).next().html(error_list[0])
                         $('#id_'+field).parent().addClass('has-error');
                     })
