@@ -41,7 +41,10 @@ class UserForm(forms.Form):
         pwd =self.cleaned_data.get('pwd')
         re_pwd = self.cleaned_data.get('re_pwd')
 
-        if pwd==re_pwd:
-            return self.cleaned_data
+        if pwd and re_pwd:
+            if pwd == re_pwd:
+                return self.cleaned_data
+            else:
+                raise ValidationError('两次密码不一致')
         else:
-            raise ValidationError('两次密码不一致')
+            return self.cleaned_data
