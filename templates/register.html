@@ -41,48 +41,26 @@
 </div>
 <script src="/static/js/jquery-3.2.1.min.js"></script>
 <script>
-    $('#valid_code_img').click(function(){
-        // 刷新验证码
-        $(this)[0].src+="?";
-    })
+$('#avatar').change(function(){
+    //获取文件对象
+    var file_obj = $(this)[0].files[0];
+    //获取文件对象路径
+    var reader = new FileReader();
+    reader.readAsDataURL(file_obj);
+    /*
+    reader.readAsArrayBuffer()
+    reader.readAsBinaryString() 文件的二进制数据
+    reader.readAsDataURL() 文件的url
+    reader.readText() 文件的文本
+    */
+    //读文件是异步的过程  所以直接设置值会不显示
+    //$('#avatar_img').attr('src',reader.result)
 
-    // 登录验证
-    $(".login_btn").click(function () {
+    reader.onload=function(){
+        $('#avatar_img').attr('src',reader.result)
+    }
 
-
-        $.ajax({
-            url: "",
-            type: "post",
-            data: {
-                user: $("#user").val(),
-                pwd: $("#pwd").val(),
-                valid_code: $("#valid_code").val(),
-                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
-            },
-            success: function (data) {
-                console.log(data);
-
-                if (data.user) {
-                    if (location.search){
-                        location.href = location.search.slice(6)
-                    }
-                    else {
-                         location.href = "/index/"
-                    }
-
-                }
-                else {
-                    $(".error").text(data.msg).css({"color": "red", "margin-left": "10px"});
-                    setTimeout(function(){
-                         $(".error").text("");
-                    },1000)
-
-                }
-            }
-        })
-
-    })
-
+})
 </script>
 </body>
 
