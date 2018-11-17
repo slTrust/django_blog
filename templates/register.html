@@ -33,34 +33,55 @@
                         </label>
                         <input type="file" id="avatar">
                     </div>
-                <input type="button" class="btn btn-default login_btn" value="submit"> <span class="error"></span>
-                <a href="/register/" class="btn btn-success pull-right">注册</a>
+                <input type="button" class="btn btn-default reg_btn" value="submit"> <span class="error"></span>
             </form>
         </div>
     </div>
 </div>
 <script src="/static/js/jquery-3.2.1.min.js"></script>
 <script>
-$('#avatar').change(function(){
-    //获取文件对象
-    var file_obj = $(this)[0].files[0];
-    //获取文件对象路径
-    var reader = new FileReader();
-    reader.readAsDataURL(file_obj);
-    /*
-    reader.readAsArrayBuffer()
-    reader.readAsBinaryString() 文件的二进制数据
-    reader.readAsDataURL() 文件的url
-    reader.readText() 文件的文本
-    */
-    //读文件是异步的过程  所以直接设置值会不显示
-    //$('#avatar_img').attr('src',reader.result)
+    $('#avatar').change(function(){
+        //获取文件对象
+        var file_obj = $(this)[0].files[0];
+        //获取文件对象路径
+        var reader = new FileReader();
+        reader.readAsDataURL(file_obj);
+        /*
+        reader.readAsArrayBuffer()
+        reader.readAsBinaryString() 文件的二进制数据
+        reader.readAsDataURL() 文件的url
+        reader.readText() 文件的文本
+        */
+        //读文件是异步的过程  所以直接设置值会不显示
+        //$('#avatar_img').attr('src',reader.result)
 
-    reader.onload=function(){
-        $('#avatar_img').attr('src',reader.result)
-    }
+        reader.onload=function(){
+            $('#avatar_img').attr('src',reader.result)
+        }
+    })
+    //注册提交事件
 
-})
+    $('.reg_btn').click(function () {
+        //文件上传要使用 FormData对象
+        var formdata = new FormData();
+        formdata.append('user',$('#id_user').val());
+        formdata.append('pwd',$('#id_pwd').val());
+        formdata.append('re_pwd',$('#id_re_pwd').val());
+        formdata.append('email',$('#id_email').val());
+        formdata.append('avatar',$('#avatar')[0].files[0]);
+        formdata.append('csrfmiddlewaretoken',$('[name=csrfmiddlewaretoken]').val())
+        $.ajax({
+            url:'',
+            type:'post',
+            contentType:false,
+            processData:false,
+            data:formdata,
+            success:function(data){
+                console.log(data)
+            }
+        })
+    })
+
 </script>
 </body>
 
