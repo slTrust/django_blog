@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-lg-offset-3">
-            <form>
+            <form id="form">
                 {% csrf_token %}
 
                 {% for field in form  %}
@@ -63,6 +63,7 @@
 
     $('.reg_btn').click(function () {
         //文件上传要使用 FormData对象
+        /*
         var formdata = new FormData();
         formdata.append('user',$('#id_user').val());
         formdata.append('pwd',$('#id_pwd').val());
@@ -70,6 +71,13 @@
         formdata.append('email',$('#id_email').val());
         formdata.append('avatar',$('#avatar')[0].files[0]);
         formdata.append('csrfmiddlewaretoken',$('[name=csrfmiddlewaretoken]').val())
+        */
+        //表单提交的优化
+        var formdata = new FormData();
+        var request_data = $('#form').serializeArray()
+        $.each(request_data,function(index,data){
+             formdata.append(data['name'],data['value'])
+        })
         $.ajax({
             url:'',
             type:'post',
