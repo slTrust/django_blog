@@ -21,5 +21,5 @@ urlpatterns = [
     path('login/', views.login),
     path('index/', views.index),
     path('get_validCode_img/', views.get_validCode_img),
-
+    path('register/', views.register),
 ]
