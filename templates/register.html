@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/static/blog/bs/css/bootstrap.min.css">
+    <style>
+        #avatar_img{
+            margin-left: 20px;
+        }
+        #avatar{display: none;}
+    </style>
 </head>
 <body>
 <h3>注册</h3>
@@ -15,14 +21,17 @@
 
                 {% for field in form  %}
                      <div class="form-group">
-                        <label for="">{{ field.label }}</label>
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
                         {{ field }}
                     </div>
 
                 {% endfor %}
                     <div class="form-group">
-                        <label for="avatar">头像</label>
-                        <input type="file">
+                        <label for="avatar">
+                            头像
+                            <img id="avatar_img" src="/static/blog/img/default.png" width="60" height="60" alt="">
+                        </label>
+                        <input type="file" id="avatar">
                     </div>
                 <input type="button" class="btn btn-default login_btn" value="submit"> <span class="error"></span>
                 <a href="/register/" class="btn btn-success pull-right">注册</a>
