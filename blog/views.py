@@ -4,6 +4,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
 from django.contrib import auth
 from blog.models import UserInfo
+from blog import models
 
 def login(request):
     """
@@ -46,7 +47,9 @@ def get_validCode_img(request):
     return HttpResponse(data)
 
 def index(request):
-    return render(request,'index.html')
+    article_list = models.Article.objects.all()
+
+    return render(request,'index.html',{'article_list':article_list})
 
 from blog.Myforms import UserForm
 

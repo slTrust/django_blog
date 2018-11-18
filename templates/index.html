@@ -92,7 +92,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">222</div>
+        <div class="col-md-6">
+            <div class="article_list">
+                {% for article in article_list %}
+                    <div class="article-item">
+                        <h5><a href="">{{ article.title }}</a></h5>
+                        <div class="article-desc">
+                            <span class="media-left">
+                                <a href=""><img height="56" width="56" src="media/{{ article.user.avatar }}" alt=""></a>
+                            </span>
+                            <span class="media-right">
+                                {{ article.desc }}
+                            </span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
         <div class="col-md-3">
              <div class="panel panel-primary">
                 <div class="panel-heading">
