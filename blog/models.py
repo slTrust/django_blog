@@ -12,6 +12,23 @@ class UserInfo(AbstractUser):
     # 文件字段  他会默认下载到项目的根目录
     # upload_to 代表下载的文件夹目录地址  如果目录不存在则创建
     avatar = models.FileField(upload_to='avatars/', default="/avatars/default.png")
+    '''
+    django有两种文件类型
+    /static/  网站所需 如 js css img
+    /media/  用户上传的东西
+       
+    如果不设置media默认是  根路径下
+    如果设置media需要在 settings.py里设置
+    MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+    
+    django 实现：
+        一旦设置里media路径  文件类型字段就会以 这个MEDIA_ROOT路径为根目录
+        默认路径问题：
+            前提：
+                不传递avatar参数
+                传递 avator=None 这样相当于设置里空  所以默认图片就不生效了
+            
+    '''
     create_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
 
     blog = models.OneToOneField(to='Blog', to_field='nid', null=True, on_delete=models.CASCADE)
