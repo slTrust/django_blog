@@ -146,10 +146,23 @@ def home_site(request,username):
     res5 = models.Article.objects.extra(select={"y_m_date":"date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values('y_m_date','c')
     print(res5)
     '''
+    # 方式一
     res6 = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values('y_m_date', 'c')
     print(res6)
 
-
-
+    # 日期查询归档函数 TruncMonth('时间字段')
+    '''
+    from django.db.models.functions import TruncMonth
+    
+    Sales.objects
+        .annotate(month=TruncMonth('时间字段'))\
+        .values('month')\
+        .annotate(c=Count('id'))\
+        .values('month','c')
+    '''
+    # 方式二
+    from django.db.models.functions import TruncMonth
+    res9 = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
+    print(res9)
 
     return render(request,'home_site.html')
