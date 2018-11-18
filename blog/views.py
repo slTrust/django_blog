@@ -139,8 +139,16 @@ def home_site(request,username):
     res3 = models.Article.objects.extra(select={"is_recent":"create_time>'2017-09-05'"}).values('title','is_recent')
     # print(res3)
 
+    '''
     res4 = models.Article.objects.extra(select={"y_m_d_date":"date_format(create_time,'%%Y-%%m-%%d')"}).values('title','y_m_d_date')
     print(res4)
+    
+    res5 = models.Article.objects.extra(select={"y_m_date":"date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values('y_m_date','c')
+    print(res5)
+    '''
+    res6 = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values('y_m_date', 'c')
+    print(res6)
+
 
 
 
