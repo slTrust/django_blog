@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login),
     path('index/', views.index),
+    path('logout/', views.logout),
+    re_path('^$',views.index),
     path('get_validCode_img/', views.get_validCode_img),
     path('register/', views.register,),
 

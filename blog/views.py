@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 
 # Create your views here.
 from django.http import JsonResponse
@@ -89,3 +89,7 @@ def register(request):
 
     form = UserForm()
     return render(request,'register.html',{'form':form})
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/login/')
