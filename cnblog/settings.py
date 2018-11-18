@@ -138,3 +138,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+
+# static的资源可以被访问 media其实也可以  需要进行配置
+MEDIA_URL = "/media/"

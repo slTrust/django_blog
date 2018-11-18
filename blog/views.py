@@ -67,7 +67,11 @@ def register(request):
             avatar_obj = request.FILES.get('avatar')
             print(avatar_obj)
             # 文件字段  他会默认下载到项目的根目录
-            user_obj = UserInfo.objects.create_user(username=user,password=pwd,email=email,avatar=avatar_obj)
+            if avatar_obj:
+                user_obj = UserInfo.objects.create_user(username=user,password=pwd,email=email,avatar=avatar_obj)
+            else:
+                user_obj = UserInfo.objects.create_user(username=user,password=pwd,email=email)
+
         else:
             print(form.cleaned_data)
             print(form.errors)
