@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd072ce1-3aa6-4d06-973b-05aef73a245d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/media/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cnblog/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnblog/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cnblog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnblog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +76,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="1899" />
-          <entry key="py" value="3599" />
+          <entry key="py" value="3683" />
           <entry key="txt" value="12" />
         </counts>
       </usages-collector>
@@ -86,7 +84,7 @@
         <counts>
           <entry key="HTML" value="1899" />
           <entry key="PLAIN_TEXT" value="12" />
-          <entry key="Python" value="3599" />
+          <entry key="Python" value="3683" />
         </counts>
       </usages-collector>
     </session>
@@ -123,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cnblog/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+            <state relative-caret-position="347">
+              <caret line="30" column="79" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
               <folding>
                 <element signature="e#630#662#0" expanded="true" />
               </folding>
@@ -135,15 +133,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
+            <state relative-caret-position="397">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
-                <marker date="1542531752506" expanded="true" signature="1389:1390" ph="..." />
-                <marker date="1542531752506" expanded="true" signature="2244:2249" ph="..." />
+                <marker date="1542533344466" expanded="true" signature="1389:1390" ph="..." />
+                <marker date="1542533344466" expanded="true" signature="2599:2604" ph="..." />
               </folding>
             </state>
           </provider>
@@ -198,10 +196,10 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/blog/Myforms.py" />
         <option value="$PROJECT_DIR$/templates/register.html" />
-        <option value="$PROJECT_DIR$/blog/views.py" />
         <option value="$PROJECT_DIR$/blog/models.py" />
         <option value="$PROJECT_DIR$/cnblog/settings.py" />
         <option value="$PROJECT_DIR$/cnblog/urls.py" />
+        <option value="$PROJECT_DIR$/blog/views.py" />
       </list>
     </option>
   </component>
@@ -340,12 +338,12 @@
     <frame x="0" y="23" width="1440" height="819" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3287483" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3287483" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -354,7 +352,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3287483" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3287483" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -445,18 +443,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-            <marker date="1542531752506" expanded="true" signature="1389:1390" ph="..." />
-            <marker date="1542531752506" expanded="true" signature="2244:2249" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/blog/Myforms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -486,10 +472,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cnblog/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+        <state relative-caret-position="347">
+          <caret line="30" column="79" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
           <folding>
             <element signature="e#630#662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+            <marker date="1542533344466" expanded="true" signature="1389:1390" ph="..." />
+            <marker date="1542533344466" expanded="true" signature="2599:2604" ph="..." />
           </folding>
         </state>
       </provider>
