@@ -3,6 +3,7 @@ from django.shortcuts import render,HttpResponse
 # Create your views here.
 from django.http import JsonResponse
 from django.contrib import auth
+from blog.models import UserInfo
 
 def login(request):
     """
@@ -58,6 +59,15 @@ def register(request):
         response={'user':None,'msg':None}
         if form.is_valid():
             response['user']=form.cleaned_data.get('user')
+            #验证通过生成一条记录
+            user =form.cleaned_data.get('user')
+            pwd = form.cleaned_data.get('pwd')
+            email = form.cleaned_data.get('email')
+            # 头像属于文件  在Files里
+            avatar_obj = request.FILES.get('avatar')
+            print(avatar_obj)
+            # 文件字段  他会默认下载到项目的根目录
+            user_obj = UserInfo.objects.create_user(username=user,password=pwd,email=email,avatar=avatar_obj)
         else:
             print(form.cleaned_data)
             print(form.errors)

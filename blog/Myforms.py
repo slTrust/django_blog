@@ -27,11 +27,12 @@ class UserForm(forms.Form):
                            )
     #局部钩子 处理用户名是否注册
     def clean_user(self):
-        user = self.cleaned_data.get('user')
+        # 注意此时 user对象的覆盖问题
+        val = self.cleaned_data.get('user')
 
-        user = UserInfo.objects.filter(username=user).first()
+        user = UserInfo.objects.filter(username=val).first()
         if not user:
-            return user
+            return val
 
         else:
             raise ValidationError('该用户已注册')

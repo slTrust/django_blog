@@ -32,7 +32,7 @@
                             头像
                             <img id="avatar_img" src="/static/blog/img/default.png" width="60" height="60" alt="">
                         </label>
-                        <input type="file" id="avatar">
+                        <input type="file" id="avatar" name="avatar">
                     </div>
                 <input type="button" class="btn btn-default reg_btn" value="submit"> <span class="error"></span>
             </form>
@@ -77,8 +77,10 @@
         var formdata = new FormData();
         var request_data = $('#form').serializeArray()
         $.each(request_data,function(index,data){
+            console.log(data['name'])
              formdata.append(data['name'],data['value'])
         })
+        formdata.append('avatar',$('#avatar')[0].files[0]);
         $.ajax({
             url:'',
             type:'post',

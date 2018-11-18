@@ -9,6 +9,8 @@ class UserInfo(AbstractUser):
     """
     nid = models.AutoField(primary_key=True)
     telephone = models.CharField(max_length=11, null=True, unique=True)
+    # 文件字段  他会默认下载到项目的根目录
+    # upload_to 代表下载的文件夹目录地址  如果目录不存在则创建
     avatar = models.FileField(upload_to='avatars/', default="/avatars/default.png")
     create_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
 
