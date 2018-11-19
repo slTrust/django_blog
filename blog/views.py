@@ -124,7 +124,7 @@ def home_site(request,username):
     # 查询每一个分类名称及对应的文章数
     res = models.Category.objects.values('pk').annotate(c=Count('article__title')).values('title','c')
     # 查询当前站点每一个分类名称以及对象的文章数
-    cate_list = models.Category.objects.filter(blog=blog).values('pk').annotate(c=Count('article__title')).values('title','c')
+    cate_list = models.Category.objects.filter(blog=blog).values('pk').annotate(c=Count('article__title')).values_list('title','c')
 
     # 查询当前站点每一个标签以及对应的文章数
     tag_list = models.Tag.objects.filter(blog=blog).values('pk').annotate(c=Count('article')).values_list('title','c')
@@ -147,8 +147,8 @@ def home_site(request,username):
     print(res5)
     '''
     # 方式一
-    res6 = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values('y_m_date', 'c')
-    print(res6)
+    date_list = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values_list('y_m_date', 'c')
+    print(date_list)
 
     # 日期查询归档函数 TruncMonth('时间字段')
     '''
@@ -161,8 +161,8 @@ def home_site(request,username):
         .values('month','c')
     '''
     # 方式二
-    from django.db.models.functions import TruncMonth
-    res9 = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
-    print(res9)
+    # from django.db.models.functions import TruncMonth
+    # date_list = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
+    # print(date_list)
 
-    return render(request,'home_site.html',{'blog':blog,'article_list':article_list})
+    return render(request,'home_site.html',{'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
