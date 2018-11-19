@@ -131,7 +131,7 @@ USE_L10N = True
 # USE_TZ = True
 
 # 使用TruncMonth 报错问题的处理  https://www.cnblogs.com/yy3b2007com/p/7601940.html
-LANGUAGE_CODE = 'zh-hans'
+# LANGUAGE_CODE = 'zh-hans'
 USE_TZ = False
 
 

@@ -98,7 +98,7 @@ def logout(request):
     auth.logout(request)
     return redirect('/login/')
 
-def home_site(request,username):
+def home_site(request,username,**kwargs):
     '''
     个人站点
     :param request:
@@ -107,6 +107,8 @@ def home_site(request,username):
     '''
 
     print('username',username)
+    print('kwargs',kwargs)
+
     user = UserInfo.objects.filter(username=username).first()
     # 判断用户是否存在
     if not user:
@@ -119,7 +121,19 @@ def home_site(request,username):
     # 基于对象查询
     # article_list = user.article_set.all()
     # 基于双下划线查询
-    article_list = models.Article.objects.filter(user=user)
+
+    if kwargs:
+        condition = kwargs.get('condition')
+        param = kwargs.get('param')
+        if condition =='category':
+            article_list = models.Article.objects.filter(user=user).filter(category__title=param)
+        elif condition=='tag':
+            article_list = models.Article.objects.filter(user=user).filter(tags__title=param)
+        else:
+            year,month = param.split('-')
+            article_list = models.Article.objects.filter(user=user).filter(create_time__year=year,create_time__month=month)
+    else:
+        article_list = models.Article.objects.filter(user=user)
 
     # 查询每一个分类名称及对应的文章数
     res = models.Category.objects.values('pk').annotate(c=Count('article__title')).values('title','c')
