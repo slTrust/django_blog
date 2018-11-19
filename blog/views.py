@@ -179,3 +179,6 @@ def home_site(request,username,**kwargs):
     # print(date_list)
 
     return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
+
+def article_detail(request,username,article_id):
+    return render(request,'article_detail.html')
