@@ -180,5 +180,29 @@ def home_site(request,username,**kwargs):
 
     return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
 
+def get_menu_data(username):
+    user = UserInfo.objects.filter(username=username).first()
+    # 判断用户是否存在
+    if not user:
+        pass
+        return render(request, 'not_found.html')
+    # 当前站点对象
+    blog = user.blog
+    # 查询当前站点每一个分类名称以及对象的文章数
+    cate_list = models.Category.objects.filter(blog=blog).values('pk').annotate(c=Count('article__title')).values_list(
+        'title', 'c')
+
+    # 查询当前站点每一个标签以及对应的文章数
+    tag_list = models.Tag.objects.filter(blog=blog).values('pk').annotate(c=Count('article')).values_list('title', 'c')
+    # print(tag_list)
+
+    date_list = models.Article.objects.filter(user=user).extra(
+        select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(
+        c=Count('nid')).values_list('y_m_date', 'c')
+    return {'blog':blog,'cate_list':cate_list,'tag_list':tag_list,'date_list':date_list}
+
 def article_detail(request,username,article_id):
-    return render(request,'article_detail.html')
+
+    context = get_menu_data(username)
+
+    return render(request,'article_detail.html',context)
