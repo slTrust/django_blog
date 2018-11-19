@@ -121,19 +121,18 @@ def home_site(request,username,**kwargs):
     # 基于对象查询
     # article_list = user.article_set.all()
     # 基于双下划线查询
+    article_list = models.Article.objects.filter(user=user)
 
     if kwargs:
         condition = kwargs.get('condition')
         param = kwargs.get('param')
         if condition =='category':
-            article_list = models.Article.objects.filter(user=user).filter(category__title=param)
+            article_list = article_listfilter(category__title=param)
         elif condition=='tag':
-            article_list = models.Article.objects.filter(user=user).filter(tags__title=param)
+            article_list = article_list.filter(tags__title=param)
         else:
             year,month = param.split('-')
-            article_list = models.Article.objects.filter(user=user).filter(create_time__year=year,create_time__month=month)
-    else:
-        article_list = models.Article.objects.filter(user=user)
+            article_list = article_list.filter(create_time__year=year,create_time__month=month)
 
     # 查询每一个分类名称及对应的文章数
     res = models.Category.objects.values('pk').annotate(c=Count('article__title')).values('title','c')
@@ -179,4 +178,4 @@ def home_site(request,username,**kwargs):
     # date_list = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
     # print(date_list)
 
-    return render(request,'home_site.html',{'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
+    return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
