@@ -165,4 +165,4 @@ def home_site(request,username):
     res9 = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
     print(res9)
 
-    return render(request,'home_site.html')
+    return render(request,'home_site.html',{'blog':blog,'article_list':article_list})

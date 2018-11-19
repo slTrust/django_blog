@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        .header{
+            height: 60px;
+            background: #369;
+        }
+        .title{
+            font-size: 18px;
+            line-height: 60px;
+            color:white;
+            margin-left: 15px;
+            margin-top: -10px;
+        }
+        .backend{
+            float:right;
+            color:white;
+            font-size: 16px;
+            text-decoration: none;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
-ddd
+<div class="header">
+    <div class="content">
+        <p class="title">
+            <span>
+                {{ blog.title }}
+            </span>
+            <a href="" class="backend">管理</a>
+        </p>
+    </div>
+</div>
 </body>
 </html>
