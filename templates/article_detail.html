@@ -20,20 +20,27 @@
 {##}
 {#    {% load my_tags %}#}
 {#    {% mulit_tag 3 9 %}#}
-    <h3 class="text-center">{{ article_obj.title }}</h3>
-
-    <div class="cont">
-        {{ article_obj.content|safe }}
-    </div>
-
-    <div id="div_digg">
-        <div class="diggit">
-            <span class="diggnum" id="digg_count">1</span>
+    <div class="article_info">
+        <h3 class="text-center">{{ article_obj.title }}</h3>
+        <div class="cont">
+            {{ article_obj.content|safe }}
         </div>
-        <div class="buryit">
-            <span class="burynum" id="bury_count">1</span>
+        <div id="div_digg">
+            <div class="diggit action">
+                <span class="diggnum" id="digg_count">1</span>
+            </div>
+            <div class="buryit action">
+                <span class="burynum" id="bury_count">1</span>
+            </div>
+            <div class="clear"></div>
+            <div class="diggword" id="digg_tips" style="color:red;"></div>
         </div>
-        <div class="clear"></div>
-        <div class="diggword" id="digg_tips" style="color:red;"></div>
+        <script>
+            $('#div_digg .action').click(function(){
+                var is_up = $(this).hasClass('diggit');
+                alert(is_up)
+
+            })
+        </script>
     </div>
 {% endblock %}
