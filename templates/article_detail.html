@@ -25,4 +25,15 @@
     <div class="cont">
         {{ article_obj.content|safe }}
     </div>
+
+    <div id="div_digg">
+        <div class="diggit">
+            <span class="diggnum" id="digg_count">1</span>
+        </div>
+        <div class="buryit">
+            <span class="burynum" id="bury_count">1</span>
+        </div>
+        <div class="clear"></div>
+        <div class="diggword" id="digg_tips" style="color:red;"></div>
+    </div>
 {% endblock %}
