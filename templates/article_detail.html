@@ -47,7 +47,7 @@
                         <a href="">#{{ forloop.counter }}楼</a>&nbsp;&nbsp;
                         <span>{{ comment.create_time|date:'Y-m-d H:i' }}</span>
                         <a href="#"><span>{{ comment.user.username }}</span></a>
-                        <a href="#" class="pull-right reply_btn" username="{{ comment.user.username }}">回复</a>
+                        <a href="#" class="pull-right reply_btn" username="{{ comment.user.username }}" comment_pk="{{ comment.pk }}">回复</a>
                     </div>
                     <div class="comment_con">
                         <p>{{ comment.content }}</p>
@@ -99,11 +99,20 @@
                 })
             })
 
+
+            //评论的pid外移
+            var pid = "";
             // 评论请求
             $('.comment_btn').click(function(){
                 // 父评论id
-                var pid = "";
+
                 var content = $('#comment_content').val();
+                if(pid){
+                    // 第一个换行符
+                    var index = content.indexOf('\n');
+                    content = content.substring(index+1);
+                    // 提交后清空pid
+                }
                 $.ajax({
                     url:'/comment/',
                     type:'post',
@@ -135,6 +144,8 @@
 
                         // 清空评论框
                         $('#comment_content').val('');
+                        //重置pid
+                        pid = '';
                     }
                 })
             });
@@ -144,7 +155,12 @@
 
                 $('#comment_content').focus();
                 var val = '@'+$(this).attr('username')+'\n';
-                $('#comment_content').val(val)
+                // @alex  的形式添加到内容里  但是提交的时候要处理
+                $('#comment_content').val(val);
+
+                //给pid赋值
+                pid = $(this).attr('comment_pk');
+
             })
         </script>
     </div>
