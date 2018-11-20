@@ -29,7 +29,8 @@ urlpatterns = [
     re_path('^$',views.index),
     path('get_validCode_img/', views.get_validCode_img),
     path('register/', views.register,),
-    path('digg/',views.digg),
+    path('digg/',views.digg), # 点赞
+    path('comment/',views.comment), # 评论
     # media配置  这样就可以 http://localhost:8000/media/avatars/py006_02_0704.png 访问图片
     re_path(r'media/(?P<path>.*)$',serve,{"document_root":settings.MEDIA_ROOT}),
 

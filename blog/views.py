@@ -244,3 +244,17 @@ def digg(requset):
         response['handled'] = obj.is_up
 
     return JsonResponse(response)
+
+def comment(request):
+    print(request.POST)
+    article_id = request.POST.get('article_id')
+    pid = request.POST.get('pid')
+    content = request.POST.get('content')
+
+    user_id = request.user.pk
+
+    comment_obj = models.Comment.objects.create(user_id=user_id,article_id=article_id,content=content,parent_comment_id=pid)
+
+
+
+    return HttpResponse('comment')
