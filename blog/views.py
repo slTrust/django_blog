@@ -214,3 +214,16 @@ def article_detail(request,username,article_id):
 
 
     return render(request,'article_detail.html',locals())
+
+# 点赞处理
+import json
+def digg(requset):
+    print(requset.POST)
+    article_id = requset.POST.get('article_id')
+    # is_up = requset.POST.get('is_up') # 注意这里是 字符串 true
+    is_up = json.loads(requset.POST.get('is_up'))
+    #点赞人就是当前登陆人
+    user_id =requset.user.pk
+
+    models.ArticleUpDown.objects.create(user_id=user_id,article_id=article_id,is_up=is_up)
+    return HttpResponse('ok')

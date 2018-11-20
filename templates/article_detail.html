@@ -20,6 +20,7 @@
 {##}
 {#    {% load my_tags %}#}
 {#    {% mulit_tag 3 9 %}#}
+    {% csrf_token %}
     <div class="article_info">
         <h3 class="text-center">{{ article_obj.title }}</h3>
         <div class="cont">
@@ -27,10 +28,10 @@
         </div>
         <div id="div_digg">
             <div class="diggit action">
-                <span class="diggnum" id="digg_count">1</span>
+                <span class="diggnum" id="digg_count">{{ article_obj.up_count }}</span>
             </div>
             <div class="buryit action">
-                <span class="burynum" id="bury_count">1</span>
+                <span class="burynum" id="bury_count">{{ article_obj.down_count }}</span>
             </div>
             <div class="clear"></div>
             <div class="diggword" id="digg_tips" style="color:red;"></div>
@@ -38,8 +39,19 @@
         <script>
             $('#div_digg .action').click(function(){
                 var is_up = $(this).hasClass('diggit');
-                alert(is_up)
 
+                $.ajax({
+                    url:'/digg/',
+                    type:'post',
+                    data:{
+                        'csrfmiddlewaretoken':$('[name=csrfmiddlewaretoken]').val(),
+                        'is_up':is_up,
+                        'article_id':{{ article_obj.pk }},
+                    },
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
             })
         </script>
     </div>
