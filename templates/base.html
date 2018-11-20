@@ -48,38 +48,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">我的标签</h3>
-                </div>
-                <div class="panel-body">
-                    {% for tag in tag_list %}
-                        <p><a href="/{{ username }}/tag/{{ tag.0 }}">{{ tag.0 }}({{ tag.1 }})</a></p>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">随笔分类</h3>
-                </div>
-                <div class="panel-body">
-                    {% for cate in cate_list %}
-                        <p><a href="/{{ username }}/category/{{ cate.0 }}">{{ cate.0 }}({{ cate.1 }})</a></p>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="panel panel-warning">
-                 <div class="panel-heading">
-                    <h3 class="panel-title">随笔归档</h3>
-                 </div>
-                <div class="panel-body">
-                    {% for date in date_list %}
-                        <p><a href="/{{ username }}/archive/{{ date.0 }}">{{ date.0 }}({{ date.1 }})</a></p>
-                    {% endfor %}
-                </div>
-            </div>
+            {% load my_tags %}
+            {% get_menu_data_dom username %}
 
         </div>
         <div class="col-md-9">

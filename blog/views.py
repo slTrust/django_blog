@@ -135,12 +135,12 @@ def home_site(request,username,**kwargs):
             article_list = article_list.filter(create_time__year=year,create_time__month=month)
 
     # 查询每一个分类名称及对应的文章数
-    res = models.Category.objects.values('pk').annotate(c=Count('article__title')).values('title','c')
+    # res = models.Category.objects.values('pk').annotate(c=Count('article__title')).values('title','c')
     # 查询当前站点每一个分类名称以及对象的文章数
-    cate_list = models.Category.objects.filter(blog=blog).values('pk').annotate(c=Count('article__title')).values_list('title','c')
+    # cate_list = models.Category.objects.filter(blog=blog).values('pk').annotate(c=Count('article__title')).values_list('title','c')
 
     # 查询当前站点每一个标签以及对应的文章数
-    tag_list = models.Tag.objects.filter(blog=blog).values('pk').annotate(c=Count('article')).values_list('title','c')
+    # tag_list = models.Tag.objects.filter(blog=blog).values('pk').annotate(c=Count('article')).values_list('title','c')
     # print(tag_list)
 
     # 查询当前站点每一个年月的名称及对应的文章数
@@ -149,7 +149,7 @@ def home_site(request,username,**kwargs):
     
     mysql 查询date类型里的年月  date_format()
     '''
-    res3 = models.Article.objects.extra(select={"is_recent":"create_time>'2017-09-05'"}).values('title','is_recent')
+    # res3 = models.Article.objects.extra(select={"is_recent":"create_time>'2017-09-05'"}).values('title','is_recent')
     # print(res3)
 
     '''
@@ -160,8 +160,8 @@ def home_site(request,username,**kwargs):
     print(res5)
     '''
     # 方式一
-    date_list = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values_list('y_m_date', 'c')
-    print(date_list)
+    # date_list = models.Article.objects.filter(user=user).extra(select={"y_m_date": "date_format(create_time,'%%Y-%%m')"}).values('y_m_date').annotate(c=Count('nid')).values_list('y_m_date', 'c')
+    # print(date_list)
 
     # 日期查询归档函数 TruncMonth('时间字段')
     '''
@@ -178,14 +178,16 @@ def home_site(request,username,**kwargs):
     # date_list = models.Article.objects.filter(user=user).annotate(xxx=TruncMonth('create_time')).values('xxx').annotate(c=Count('nid')).values_list('xxx','c')
     # print(date_list)
 
-    return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
+    # return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,"tag_list":tag_list,'cate_list':cate_list,'date_list':date_list})
+    return render(request,'home_site.html',{'username':username,'blog':blog,'article_list':article_list,})
+
 
 def get_menu_data(username):
     user = UserInfo.objects.filter(username=username).first()
     # 判断用户是否存在
-    if not user:
-        pass
-        return render(request, 'not_found.html')
+    # if not user:
+    #     pass
+    #     return render(request, 'not_found.html')
     # 当前站点对象
     blog = user.blog
     # 查询当前站点每一个分类名称以及对象的文章数
@@ -203,6 +205,6 @@ def get_menu_data(username):
 
 def article_detail(request,username,article_id):
 
-    context = get_menu_data(username)
+    # context = get_menu_data(username)
 
     return render(request,'article_detail.html',context)
