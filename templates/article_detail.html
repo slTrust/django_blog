@@ -49,6 +49,16 @@
                         <a href="#"><span>{{ comment.user.username }}</span></a>
                         <a href="#" class="pull-right reply_btn" username="{{ comment.user.username }}" comment_pk="{{ comment.pk }}">回复</a>
                     </div>
+
+                    {# 子评论显示父评论    #}
+                    {% if comment.parent_comment_id %}
+                    <div class="pid_info well">
+                        <p>
+                            {{ comment.parent_comment.user.username }}:{{ comment.parent_comment.content }}
+                        </p>
+                    </div>
+                    {% endif %}
+
                     <div class="comment_con">
                         <p>{{ comment.content }}</p>
                     </div>
