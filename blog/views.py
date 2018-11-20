@@ -256,6 +256,12 @@ def comment(request):
 
     comment_obj = models.Comment.objects.create(user_id=user_id,article_id=article_id,content=content,parent_comment_id=pid)
 
+    response={}
+
+    # 序列化的时候 要注意时间 需要先变成字符串
+    response['create_time'] = comment_obj.create_time.strftime('%Y-%m-%d %X')
+    response['username'] = request.user.username
+    response['content'] = comment_obj.content
 
 
-    return HttpResponse('comment')
+    return JsonResponse(response)

@@ -115,6 +115,23 @@
                     },
                     success:function(data){
                         console.log(data)
+                        var create_time = data.create_time;
+                        var username = data.username;
+                        var content = data.content;
+
+                        var s = `
+                            <li class="list-group-item">
+                                <div>
+                                    {#<a href="">#{{ forloop.counter }}楼</a>&nbsp;&nbsp;#}
+                                    <span>${create_time}</span>
+                                    <a href="#"><span>${username}</span></a>
+                                </div>
+                                <div class="comment_con">
+                                    <p>${content}</p>
+                                </div>
+                            </li>
+                        `;
+                        $('ul.comment_list').append(s);
 
                         // 清空评论框
                         $('#comment_content').val('');
