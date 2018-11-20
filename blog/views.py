@@ -206,5 +206,11 @@ def get_menu_data(username):
 def article_detail(request,username,article_id):
 
     # context = get_menu_data(username)
+    user = UserInfo.objects.filter(username=username).first()
+    blog = user.blog
 
-    return render(request,'article_detail.html',context)
+    article_obj = models.Article.objects.filter(pk=article_id).first()
+
+
+
+    return render(request,'article_detail.html',locals())
