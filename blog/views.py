@@ -234,7 +234,7 @@ def digg(requset):
         # 赞踩关系表一条数据
         ard = models.ArticleUpDown.objects.create(user_id=user_id,article_id=article_id,is_up=is_up)
         # 文章 表  赞  踩个数增加或减少
-        queryset =  models.Article.objects.filter(pk=article_id)
+        queryset = models.Article.objects.filter(pk=article_id)
         if is_up:
             queryset.update(up_count=F('up_count') + 1)
         else:
