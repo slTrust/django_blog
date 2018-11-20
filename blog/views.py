@@ -218,7 +218,7 @@ def article_detail(request,username,article_id):
 # 点赞处理
 import json
 from django.db.models import F
-
+from django.http import JsonResponse
 def digg(requset):
     print(requset.POST)
     article_id = requset.POST.get('article_id')
@@ -227,13 +227,20 @@ def digg(requset):
     #点赞人就是当前登陆人
     user_id =requset.user.pk
 
-    # 赞踩关系表一条数据
-    ard = models.ArticleUpDown.objects.create(user_id=user_id,article_id=article_id,is_up=is_up)
-    # 文章 表  赞  踩个数增加或减少
-    queryset =  models.Article.objects.filter(pk=article_id)
-    if is_up:
-        queryset.update(up_count=F('up_count') + 1)
+    # 优化  如果已经 点赞或者踩了  就不能在进行操作了
+    obj = models.ArticleUpDown.objects.filter(user_id=user_id,article_id=article_id).first()
+    response = {"state":True}
+    if not obj:
+        # 赞踩关系表一条数据
+        ard = models.ArticleUpDown.objects.create(user_id=user_id,article_id=article_id,is_up=is_up)
+        # 文章 表  赞  踩个数增加或减少
+        queryset =  models.Article.objects.filter(pk=article_id)
+        if is_up:
+            queryset.update(up_count=F('up_count') + 1)
+        else:
+            queryset.update(down_count=F('down_count') + 1)
     else:
-        queryset.update(down_count=F('down_count') + 1)
+        response['state'] = False
+        response['handled'] = obj.is_up
 
-    return HttpResponse('ok')
+    return JsonResponse(response)

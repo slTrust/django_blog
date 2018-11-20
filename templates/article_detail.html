@@ -50,6 +50,19 @@
                     },
                     success:function(data){
                         console.log(data)
+                        if(data.state){
+
+                        }else{
+                            if(data.handled){
+                                 $('#digg_tips').html('您已经推荐过')
+                            }else{
+                                $('#digg_tips').html('您已经反对过')
+                            }
+                            setTimeout(function(){
+                                 $('#digg_tips').html('')
+                            },1000)
+
+                        }
                     }
                 })
             })
