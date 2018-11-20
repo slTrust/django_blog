@@ -211,7 +211,8 @@ def article_detail(request,username,article_id):
 
     article_obj = models.Article.objects.filter(pk=article_id).first()
 
-
+    # 评论列表
+    comment_list = models.Comment.objects.filter(article_id=article_id)
 
     return render(request,'article_detail.html',locals())
 
