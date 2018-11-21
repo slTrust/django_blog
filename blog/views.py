@@ -277,6 +277,45 @@ def comment(request):
     response['content'] = comment_obj.content
 
 
+    # 发送邮件的功能
+    '''
+    python有个模块email 但是这样用起来就很复杂
+    
+    django内置了一个 邮件模块 
+    
+    from django.core.mail import send_mail
+    
+    在settings里设置邮箱地址
+    EMAIL_HOST = 'smtp.exmail.qq.com' #如果是163改成 stmp.163.com
+    EMAIL_PORT = 456 # 端口号
+    EMAIL_HOST_USER = '' # 账号
+    EMAIL_HOST_PASSWORD = '' # 授权码  非你的密码
+    # EMAIL_FROM_EMAIL = EMAIL_HOST_USER
+    EMAIL_USE_SSL = True # 是否使用证书
+    
+    '''
+    from django.core.mail import send_mail
+    from cnblog import settings
+    # 文章对象
+    article_obj = models.Article.objects.filter(pk=article_id).first()
+    # send_mail(
+    #     '您的文章%s新增了一条评论'%article_obj.title,  # 标题
+    #     content ,# 评论内容
+    #     settings.EMAIL_HOST_USER, # 账号
+    #     # ['598540392@qq.com']
+    #     ['1620853536@qq.com']
+    # )
+    # 发送邮件是同步的代码  影响提交的效率
+    import threading
+    threading.Thread(target=send_mail,args=(
+        '您的文章%s新增了一条评论' % article_obj.title,  # 标题
+        content,  # 评论内容
+        settings.EMAIL_HOST_USER,  # 账号
+        # ['598540392@qq.com']
+        ['1620853536@qq.com']
+    ))
+
+
     return JsonResponse(response)
 
 def get_comment_tree(request):

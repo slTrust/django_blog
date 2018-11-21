@@ -148,3 +148,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 # static的资源可以被访问 media其实也可以  需要进行配置
 MEDIA_URL = "/media/"
+
+
+#设置参考
+'''
+https://www.cnblogs.com/draculaqk/p/8024088.html
+获取qq授权码
+https://jingyan.baidu.com/article/90895e0f2af42664ec6b0b14.html
+'''
+EMAIL_HOST = 'smtp.qq.com' #如果是163改成 stmp.163.com
+EMAIL_PORT = 465 # 端口号
+EMAIL_HOST_USER = '598540392@qq.com' # 账号
+EMAIL_HOST_PASSWORD = 'hcrnzwwujiokbeaf' # 授权码  非你的密码
+EMAIL_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_SSL = True # 是否使用证书
