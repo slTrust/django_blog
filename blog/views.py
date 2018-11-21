@@ -272,7 +272,15 @@ def get_comment_tree(request):
     #res = models.Comment.objects.filter(article_id=article_id).values('pk','comment','parent_comment_id')
     # res是一个queryset 无法序列化
     # 需要list转化
-    res = list(models.Comment.objects.filter(article_id=article_id).values('pk','content','parent_comment_id'))
-
+    res = list(models.Comment.objects.filter(article_id=article_id).order_by('pk').values('pk','content','parent_comment_id'))
+    '''
+    注意select默认查询的顺序是按 id排序的  
+    
+    所以 不会出现先有子评论  在有父评论的情况
+    
+    一定是  先有父评论  再有子评论
+    # 稳妥处理就是加上order_by
+    models.Comment.objects.filter(article_id=article_id).order_by('pk').values('pk','content','parent_comment_id')
+    '''
     # 请务必设置 safe=False 序列化必须设置这个参数
     return JsonResponse(res,safe=False)
