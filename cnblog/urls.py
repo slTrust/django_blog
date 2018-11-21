@@ -31,6 +31,8 @@ urlpatterns = [
     path('register/', views.register,),
     path('digg/',views.digg), # 点赞
     path('comment/',views.comment), # 评论
+    path('get_comment_tree/',views.get_comment_tree), # 评论树
+
     # media配置  这样就可以 http://localhost:8000/media/avatars/py006_02_0704.png 访问图片
     re_path(r'media/(?P<path>.*)$',serve,{"document_root":settings.MEDIA_ROOT}),
 

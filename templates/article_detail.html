@@ -39,6 +39,27 @@
             </div>
         </div>
         <div class="comments">
+
+            <p class="tree_btn">评论树</p>
+            <div class="comment_tree">
+
+            </div>
+            <script>
+                $('.tree_btn').click(function(){
+                    $.ajax({
+                        url:'/get_comment_tree/',
+                        type:'get',
+                        data:{
+                            'article_id':'{{ article_obj.pk }}',
+                        },
+                        success:function(data){
+                            console.log(data)
+                        }
+
+                    })
+                })
+            </script>
+
             <p>评论列表</p>
             <ul class="list-group comment_list">
                 {% for comment in comment_list %}
