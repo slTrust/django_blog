@@ -7,6 +7,9 @@ from blog.models import UserInfo
 from blog import models
 from django.db.models import Avg,Max,Min,Count
 
+# 事务模块
+from django.db import transaction
+
 def login(request):
     """
         登录视图函数:
@@ -254,7 +257,17 @@ def comment(request):
 
     user_id = request.user.pk
 
-    comment_obj = models.Comment.objects.create(user_id=user_id,article_id=article_id,content=content,parent_comment_id=pid)
+    # 事务处理 ——同增同减
+    '''
+    数据同步
+    文章评论数加一
+    '''
+    with transaction.atomic():
+        # 评论记录添加
+        comment_obj = models.Comment.objects.create(user_id=user_id,article_id=article_id,content=content,parent_comment_id=pid)
+        # 文章评论数加一
+        models.Article.objects.filter(pk=article_id).update(comment_count=F('comment_count')+1)
+
 
     response={}
 
