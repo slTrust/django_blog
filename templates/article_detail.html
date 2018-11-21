@@ -44,10 +44,10 @@
                 {% for comment in comment_list %}
                     <li class="list-group-item">
                     <div>
-                        <a href="">#{{ forloop.counter }}楼</a>&nbsp;&nbsp;
+                        <a href="javascript:;">#{{ forloop.counter }}楼</a>&nbsp;&nbsp;
                         <span>{{ comment.create_time|date:'Y-m-d H:i' }}</span>
-                        <a href="#"><span>{{ comment.user.username }}</span></a>
-                        <a href="#" class="pull-right reply_btn" username="{{ comment.user.username }}" comment_pk="{{ comment.pk }}">回复</a>
+                        <a href="javascript:;"><span>{{ comment.user.username }}</span></a>
+                        <a href="javascript:;" class="pull-right reply_btn" username="{{ comment.user.username }}" comment_pk="{{ comment.pk }}">回复</a>
                     </div>
 
                     {# 子评论显示父评论    #}
@@ -138,19 +138,32 @@
                         var username = data.username;
                         var content = data.content;
 
+
+                        // 回复别人的时候要额外添加父评论内容
+                        var parentCommentDom = '';
+                        if(pid!==''){
+                            var parentName = $('[comment_pk='+pid+']').attr('username');
+                            var parentContent =  $('[comment_pk='+pid+']').parent().parent().find('.comment_con p').html();
+                            parentCommentDom = `<div class="pid_info well"><p>${parentName}:${parentContent}</p></div>`;
+                        }
                         var s = `
                             <li class="list-group-item">
                                 <div>
                                     {#<a href="">#{{ forloop.counter }}楼</a>&nbsp;&nbsp;#}
                                     <span>${create_time}</span>
-                                    <a href="#"><span>${username}</span></a>
+                                    <a href="javascript:;"><span>${username}</span></a>
                                 </div>
+                                ${parentCommentDom}
                                 <div class="comment_con">
                                     <p>${content}</p>
                                 </div>
                             </li>
                         `;
                         $('ul.comment_list').append(s);
+
+
+
+
 
                         // 清空评论框
                         $('#comment_content').val('');
