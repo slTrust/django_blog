@@ -59,10 +59,15 @@
                                 var content = item.content;
                                 var parent_id = item.parent_comment_id;
                                 //先处理根评论
+
+                                var s = `<div class="comment_item" comment_id="${pk}"><span>${content}</span></div>`;
+
                                 if(!parent_id){
-                                    var s = `<div comment_id="${pk}"><span>${content}</span></div>`;
-                                    console.log(s)
                                     $('.comment_tree').append(s)
+                                }else{
+                                    //处理子评论
+                                    // 根据pid找对应dom 然后append
+                                    $('[comment_id='+parent_id+']').append(s)
                                 }
                             })
                         }
