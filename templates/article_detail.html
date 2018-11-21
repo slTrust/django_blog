@@ -54,6 +54,17 @@
                         },
                         success:function(data){
                             console.log(data)
+                            $.each(data,function(index,item){
+                                var pk = item.pk;
+                                var content = item.content;
+                                var parent_id = item.parent_comment_id;
+                                //先处理根评论
+                                if(!parent_id){
+                                    var s = `<div comment_id="${pk}"><span>${content}</span></div>`;
+                                    console.log(s)
+                                    $('.comment_tree').append(s)
+                                }
+                            })
                         }
 
                     })

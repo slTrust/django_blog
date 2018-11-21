@@ -272,7 +272,7 @@ def get_comment_tree(request):
     #res = models.Comment.objects.filter(article_id=article_id).values('pk','comment','parent_comment_id')
     # res是一个queryset 无法序列化
     # 需要list转化
-    res = list(models.Comment.objects.filter(article_id=article_id).values('pk','comment','parent_comment_id'))
+    res = list(models.Comment.objects.filter(article_id=article_id).values('pk','content','parent_comment_id'))
 
     # 请务必设置 safe=False 序列化必须设置这个参数
     return JsonResponse(res,safe=False)
